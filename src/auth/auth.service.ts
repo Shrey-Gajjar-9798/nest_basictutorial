@@ -1,5 +1,5 @@
 import { ForbiddenException, Injectable } from "@nestjs/common";
-import { AuthDTO } from "src/dto";
+import { AuthDTO } from "src/auth/dto";
 import * as argon from "argon2"
 import { PrismaService } from "src/prisma/prisma.service";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
@@ -38,6 +38,9 @@ export class AuthService {
   async signin(dto: AuthDTO){
 
     //check the user exist or not 
+
+    console.log("THe prisma improted in auth service :",this.prisma);
+    
     const user = await this.prisma.user.findUnique({
       where:{
         email:dto.email,
